@@ -1,0 +1,89 @@
+<header>
+    <div class="navbar">
+        <div class="logo" href="">VTRSTORE</div>
+
+        <div class="header-actions">
+            <a href="{% url 'view_cart' %}" class="cart-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                
+                {% if cart_qtd > 0 %}
+                    <span class="cart-badge">{{ cart_qtd }}</span>
+                {% endif %}
+            </a>
+        </div>
+
+        <input type="checkbox" id="menu-check" class="menu-check">
+        <label for="menu-check" class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </label>
+
+        <nav id="nav-menu">
+            <ul>
+                {% if user.is_authenticated %}
+        <li class="usuario-logado">
+            <a href="{% url 'dashboard' %}">Olá, {{ user.username }}</a>
+        </li>
+        <li>
+            <a href="{% url 'logout' %}" style="color: red;">Sair</a>
+        </li>
+    {% else %}
+        <li><a href="{% url 'login' %}">Entrar</a></li>
+        <li><a href="{% url 'cadastro' %}" class="nav-cta">Criar Conta</a></li>
+    {% endif %}
+                <li class="dropdown-trigger">
+                    <a href="#">VER TODOS</a>
+                    <ul class="dropdown-menu">
+                         <li><a href="{% url 'colecao' %}">Coleções</a></li>
+                         <li><a href="{% url 'camisetas' %}">Camisetas</a></li>
+                         <li><a href="{% url 'moletons' %}">Moletons</a></li>
+                         <li><a href="{% url 'jaquetas' %}">Jaquetas </a></li>
+                         <li><a href="{% url 'calcas' %}">Calças</a></li>
+                         <li><a href="{% url 'shorts' %}">Shorts</a></li>
+                         <li><a href="{% url 'sobre' %}">Sobre</a></li>
+                         <li><a href="{% url 'contato' %}">Contato</a></li>
+                         </ul>
+                </li>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'colecao' %}">Coleções</a></li>
+                <li><a href="{% url 'sobre' %}">Sobre</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+                <li><a class="nav-cta" href="{% url 'drops' %}">Drops</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<style>
+    /* Remove as margens do navegador para colar nos cantos */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Garante que o container ocupe tudo */
+header {
+    width: 100% !important;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+/* AQUI ESTÁ O AJUSTE */
+.navbar {
+    width: 100% !important;     
+    max-width: 100% !important; 
+    
+   
+    padding: 30px 40px !important; 
+    
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+</style>

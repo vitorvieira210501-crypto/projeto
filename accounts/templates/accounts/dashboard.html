@@ -1,0 +1,88 @@
+{% extends 'global/base.html' %}
+
+{% block texto %}
+<section class="dashboard-section">
+    <div class="dashboard-container">
+        
+        <div class="dashboard-header">
+            <h1>Olá, {{ user.first_name|default:user.username }}</h1>
+            <p>Bem-vindo ao seu painel. O que deseja fazer hoje?</p>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <a href="{% url 'meus_pedidos' %}" class="dash-card">
+                <div class="dash-icon">📦</div>
+                <h3>Meus Pedidos</h3>
+                <p>Rastreie suas compras e veja o histórico.</p>
+            </a>
+
+            <a href="{% url 'meus_dados' %}" class="dash-card">
+                <div class="dash-icon">👤</div>
+                <h3>Meus Dados</h3>
+                <p>Gerencie suas informações pessoais.</p>
+            </a>
+
+           <a href="{% url 'enderecos' %}" class="dash-card">
+                <div class="dash-icon">📍</div>
+                <h3>Endereços</h3>
+                <p>Cadastre seus locais de entrega.</p>
+            </a>
+
+            <a href="{% url 'logout' %}" class="dash-card logout-card">
+                <div class="dash-icon">🚪</div>
+                <h3>Sair</h3>
+                <p>Desconectar da sua conta.</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .dashboard-section { padding: 80px 20px; min-height: 70vh; display: flex; justify-content: center; }
+    .dashboard-container { width: 100%; max-width: 1000px; }
+    
+    .dashboard-header { margin-bottom: 40px; text-align: left; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+    .dashboard-header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; }
+    .dashboard-header p { color: #666; font-size: 1.1rem; }
+
+    /* GRID DO PAINEL */
+    .dashboard-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+        gap: 20px; 
+    }
+
+    /* CARD ESTILO */
+    .dash-card {
+        background: white;
+        border: 1px solid #eee;
+        padding: 30px;
+        text-decoration: none;
+        color: black;
+        border-radius: 8px;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dash-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: black;
+    }
+
+    .dash-icon { font-size: 2rem; margin-bottom: 15px; }
+    .dash-card h3 { font-size: 1.2rem; margin: 0 0 10px 0; font-weight: bold; text-transform: uppercase; }
+    .dash-card p { font-size: 0.9rem; color: #777; margin: 0; line-height: 1.5; }
+
+    /* Estilo especial para o botão sair */
+    .logout-card:hover {
+        background-color: #fafafa;
+        border-color: red;
+    }
+    .logout-card:hover h3 { color: red; }
+</style>
+{% endblock %}

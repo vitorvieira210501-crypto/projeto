@@ -1,0 +1,60 @@
+{% extends 'global/base.html' %} 
+
+{% block texto %}
+<main>
+<section class="secao-auth">
+    <div class="container-auth">
+        <h2>Acesse sua conta</h2>
+        
+        <form method="POST" class="form-auth">
+            {% csrf_token %}
+            
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+
+            {% for campo in formulario %}
+                <div class="grupo-form">
+                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                    {{ campo }}
+                    
+                    {% if campo.errors %}
+                        <div class="msg-erro">
+                            {% for erro in campo.errors %}
+                                <p>{{ erro }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-preto">ENTRAR</button>
+        </form>
+
+        <p class="rodape-auth">
+            Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
+        </p>
+    </div>
+</section>
+</main>
+
+<style>
+  .secao-auth { 
+    padding: 50px 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 75vh; /* Aumentamos para ocupar 75% da tela */
+}
+    .container-auth { width: 100%; max-width: 400px; background: #fff; padding: 30px; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .grupo-form { margin-bottom: 15px; }
+    .grupo-form label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+    .grupo-form input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    .msg-erro { color: #e74c3c; font-size: 0.8rem; margin-top: 5px; }
+    .btn-preto { width: 100%; padding: 15px; background: black; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px; margin-top: 10px; transition: background 0.3s; }
+    .btn-preto:hover { background: #333; }
+    .rodape-auth { text-align: center; margin-top: 20px; font-size: 0.9rem; }
+    .rodape-auth a { color: black; font-weight: bold; text-decoration: none; }
+    .rodape-auth a:hover { text-decoration: underline; }
+</style>
+{% endblock %}

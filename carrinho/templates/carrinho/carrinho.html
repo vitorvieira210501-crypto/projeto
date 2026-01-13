@@ -1,0 +1,180 @@
+{% extends 'global/base.html'%}
+{% block texto %}
+
+
+    <main>
+        <section class="cart-page">
+            
+            <div class="section-header" style="max-width: var(--max-width); margin: 0 auto 3rem auto; padding: 0 var(--spacing-default);">
+                <h1 style="font-size: 3rem;">MEU CARRINHO</h1>
+            </div>
+
+            <div class="cart-container" style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default);">
+
+                <div class="cart-items">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th class="table-header">Produto</th>
+                                <th class="table-header">Preço</th>
+                                <th class="table-header">Quantidade</th>
+                                <th class="table-header">Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-list">
+                            </tbody>
+                    </table>
+                    
+                    <div id="empty-cart-message">
+                        Seu carrinho está vazio. Comece a comprar!
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <h3>RESUMO DO PEDIDO</h3>
+                    
+                    <div class="summary-line">
+                        <span>Subtotal</span>
+                        <span id="subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Frete</span>
+                        <span id="shipping">R$ 25,00</span>
+                    </div>
+                    <div class="summary-line total-line">
+                        <span>TOTAL</span>
+                        <span id="final-total">R$ 25,00</span>
+                    </div>
+
+                    <a href="#" class="nav-cta" style="width: 100%; text-align: center;">FINALIZAR COMPRA</a>
+                </div>
+            </div>
+        </section>
+    </main>
+   
+
+    <script>
+        // Dados de simulação para os produtos
+        const sampleProducts = [
+            { id: 1, name: "Camiseta Black Ice I", price: 149.00, img: "/static/global/image/dropblackice1.jpg", size: "M" },
+            { id: 2, name: "Calça Streetwear cargo", price: 200.00, img: "/static/global/image/calçasarja.jpg", size: "G" },
+            { id: 3, name: "Jaqueta Pelea", price: 299.00, img: "/static/global/image/jaquetacargo.jpg", size: "P" }
+            { id: 31, name: "Calça Urban Utility Black", price: 200.00, description: "Calça utilitária em sarja pesada com corte cônico moderno e detalhes em zíper.", img: "/static/global/image/calça1.jpg", sizes: ["38", "40", "42", "44"], colors: ["Preto"] },
+            { id: 32, name: "Calça Cargo 'Wide' Bege", price: 329.00, description: "Cargo de fit largo e desestruturado, feito em algodão premium.", img: "/static/global/image/calça2.jpg", sizes: ["38", "40", "42", "44"], colors: ["Bege", "Verde"] },
+            { id: 33, name: "Calça Jeans 'Heritage' Azul", price: 359.00, description: "Jeans clássico de corte reto, lavagem média e alta durabilidade.", img: "/static/global/image/calça3.jpg", sizes: ["38", "40", "42", "44", "46"], colors: ["Jeans Azul"] },
+            { id: 34, name: "Calça Jogger 'Essential'", price: 219.00, description: "Jogger leve com punho elástico na barra. Conforto para o dia a dia.", img: "/static/global/image/calça4.jpg", sizes: ["P", "M", "G", "GG"], colors: ["Preto", "Cinza"] },
+            { id: 35, name: "Calça Parachute 'Wind' Branco", price: 299.00, description: "Calça Parachute em nylon leve, com ajuste no tornozelo e cintura. Estilo techwear.", img: "/static/global/image/calça5.jpg", sizes: ["M", "G"], colors: ["Branco", "Preto"] },
+            { id: 36, name: "Calça Moletom 'Heavy' Grafite", price: 249.00, description: "Moletom pesado e felpado. Ideal para combinar com nossos hoodies.", img: "/static/global/image/calça6.jpg", sizes: ["P", "M", "G", "GG"], colors: ["Grafite", "Preto"] },
+           
+        ];
+
+        let cartItems = [];
+        
+        // Elementos DOM
+        const cartList = document.getElementById('cart-list');
+        const emptyMessage = document.getElementById('empty-cart-message');
+        const subtotalEl = document.getElementById('subtotal');
+        const finalTotalEl = document.getElementById('final-total');
+        const shippingCost = 25.00; 
+
+        // --- FUNÇÕES DE LÓGICA DO CARRINHO ---
+
+        function renderCart() {
+            cartList.innerHTML = '';
+            let subtotal = 0;
+
+            if (cartItems.length === 0) {
+                emptyMessage.style.display = 'block';
+                subtotalEl.textContent = 'R$ 0,00';
+                finalTotalEl.textContent = 'R$ 25,00'; 
+                return;
+            }
+            emptyMessage.style.display = 'none';
+
+            cartItems.forEach((item, index) => {
+                const totalItemPrice = item.price * item.quantity;
+                subtotal += totalItemPrice;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="product-line" style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="${item.img}" alt="${item.name}" style="width: 80px; height: 100px; object-fit: cover;">
+                            <div class="product-info">
+                                <a href="#">${item.name}</a>
+                                <small style="display: block;">Tamanho: ${item.size} | Cor: ${item.color || 'Preto'}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="price-col">R$ ${item.price.toFixed(2).replace('.', ',')}</td>
+                    <td>
+                        <div class="quantity-control" style="display: flex; align-items: center; border: 1px solid #ddd;">
+                            <button class="qty-minus" data-index="${index}" style="padding: 0.5rem; border: none; background: none;">-</button>
+                            <input type="number" value="${item.quantity}" min="1" max="10" readonly style="width: 30px; text-align: center; border: none;">
+                            <button class="qty-plus" data-index="${index}" style="padding: 0.5rem; border: none; background: none;">+</button>
+                        </div>
+                    </td>
+                    <td class="price-col">R$ ${totalItemPrice.toFixed(2).replace('.', ',')}</td>
+                    <td><span class="remove-btn" data-index="${index}" title="Remover" style="cursor: pointer;">&times;</span></td>
+                `;
+                cartList.appendChild(row);
+            });
+
+            const finalTotal = subtotal + shippingCost;
+            subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            finalTotalEl.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+
+            setupCartListeners();
+        }
+
+        function addItemToCart(product) {
+            const existingItem = cartItems.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({ ...product, quantity: 1 });
+            }
+            renderCart();
+        }
+
+        function setupCartListeners() {
+            document.querySelectorAll('.qty-plus').forEach(button => {
+                button.onclick = (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    cartItems[index].quantity += 1;
+                    renderCart();
+                };
+            });
+
+            document.querySelectorAll('.qty-minus').forEach(button => {
+                button.onclick = (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    if (cartItems[index].quantity > 1) {
+                        cartItems[index].quantity -= 1;
+                    }
+                    renderCart();
+                };
+            });
+
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    cartItems.splice(index, 1);
+                    renderCart();
+                };
+            });
+        }
+
+        // --- INICIALIZAÇÃO (Exemplo com 2 itens no carrinho) ---
+        
+        cartItems = [
+           
+        ];
+        
+        renderCart();
+    </script>
+</body>
+</html>
+{% endblock texto %}

@@ -1,0 +1,192 @@
+ {% extends 'global/base.html' %} 
+ {% block texto %}
+
+    <!-- Banner Carousel -->
+    <div class="carousel-container">
+        <div id="carousel-slide" class="carousel-slide">
+            
+            <!-- Item 1: Nova Coleção -->
+            <div class="carousel-item">
+                <!-- Imagem Placeholder -->
+                <img src="https://placehold.co/1200x700/1a1a1a/ff0000?text=DROP+REBEL+YELL" onerror="this.onerror=null; this.src='https://placehold.co/1200x700/1a1a1a/ff0000?text=DROP+REBEL+YELL';" alt="Nova Coleção Street">
+                <div class="banner-content">
+                    <h1>DROP 'REBEL YELL'</h1>
+                    <p>Rebeldia, atitude e autenticidade. O inverno é nosso.</p>
+                    <a href="droprebelyell.html">Explorar Coleção</a>
+                </div>
+            </div>
+
+            <!-- Item 2: Verão -->
+            <div class="carousel-item">
+                 <!-- Imagem Placeholder -->
+                <img src="https://placehold.co/1200x700/333/ffffff?text=VER%C3%83O+2025+URBANO" onerror="this.onerror=null; this.src='https://placehold.co/1200x700/333/ffffff?text=VER%C3%83O+2025+URBANO';" alt="Promoção de Verão">
+                <div class="banner-content">
+                    <h1>FRESH SUMMER 2025</h1>
+                    <p>Peças leves e oversized para o calor urbano.</p>
+                    <a href="dropfreshsummer.html">Conferir Drops</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões do Carrossel -->
+        <button id="prevBtn" class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+        <button id="nextBtn" class="carousel-btn next" aria-label="Próximo">&#10095;</button>
+
+        <!-- Pontos de Navegação -->
+        <div id="carousel-dots-container" class="carousel-dots-container">
+            <!-- Os pontos serão gerados aqui pelo JS -->
+        </div>
+    </div>
+
+    <!-- Seção Principal: Coleções -->
+<section id="colecoes">
+    <div class="grid">
+    {% for product in products %}
+        <div class="card {% if product.stock > 0 %}quick-view-trigger{% endif %}" 
+             data-product-id="{{ product.id }}"
+             data-name="{{ product.name }}"
+             data-price="{{ product.price }}"
+             data-description="{{ product.description }}"
+             data-image="{% if product.image %}{{ product.image.url }}{% else %}/static/global/image/placeholder.jpg{% endif %}"
+             data-sizes="P,M,G,GG"
+             data-colors="Preto,Branco"
+             data-url="{% url 'produto_detalhe' product.id %}">
+             
+            <div class="product-img-wrapper">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="https://placehold.co/600x800/000000/FFFFFF/png?text=VTR" alt="Sem Imagem">
+                {% endif %}
+
+                {% if product.stock <= 0 %}
+                    <span class="selo-esgotado">ESGOTADO</span>
+                {% endif %}
+            </div>
+            
+            
+            <div class="card-body">
+                <h4>{{ product.name }}</h4>
+                
+                {% if product.stock > 0 %}
+                    <span class="oldprice">R$ {{ product.price|add:"50" }}</span>
+                    <span class="price">R$ {{ product.price }}</span>
+                {% else %}
+                    <span class="price" style="color: red; font-size: 1rem;">Indisponível</span>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>Nenhum produto em destaque no momento.</p>
+    {% endfor %}
+    </div>
+</section>
+
+{% include 'global/partials/_quick_view_modal.html' %}
+
+
+    <script>
+        // Inicializa ícones do Lucide (usados nos botões do carrossel)
+        lucide.createIcons();
+
+        // Lógica do Carrossel (Idêntica à anterior, pois o CSS e a funcionalidade permanecem)
+        const slideContainer = document.getElementById('carousel-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('carousel-dots-container');
+        const items = slideContainer.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+        let slideInterval;
+        const totalItems = items.length;
+
+        /**
+         * Move o carrossel para um índice específico.
+         */
+        function goToSlide(index) {
+            if (index < 0) {
+                index = totalItems - 1;
+            } else if (index >= totalItems) {
+                index = 0;
+            }
+
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            slideContainer.style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
+
+        /**
+         * Avança para o próximo slide.
+         */
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        /**
+         * Cria e atualiza os pontos de navegação.
+         */
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalItems; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                if (i === currentIndex) {
+                    dot.classList.add('active');
+                }
+
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetInterval();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        /**
+         * Atualiza a cor dos pontos para refletir o slide atual.
+         */
+        function updateDots() {
+            dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        /**
+         * Inicia/Reseta o intervalo de slide automático.
+         */
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        // Adiciona listeners para os botões
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+            resetInterval();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+            resetInterval();
+        });
+
+        // Inicialização
+        window.onload = function () {
+            createDots();
+            startInterval();
+        };
+
+    </script>
+
+</body>
+</html>
+{% endblock texto %}
+
+

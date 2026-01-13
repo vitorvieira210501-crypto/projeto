@@ -1,0 +1,1114 @@
+:root {
+  --primary-color: #1a1a1a;    /* Preto Forte para texto e detalhes (Street) */
+  --secondary-color: #ffffff;  /* Fundo principal: Branco (Street) */
+  --text-color: #333;          /* Cor do corpo do texto */
+  --light-text-color: #777;    /* Cinza para textos secundários */
+  --accent-color: #ff0000;     /* Vermelho VIVO para destaque e CTAs (Street) */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --spacing-default: 2rem;
+  --max-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  background-color: var(--secondary-color); /* Fundo branco (Alto Contraste) */
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color); /* Links Pretos */
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color); /* Hover Vermelho */
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 2. Layout Global */
+.navbar,
+.banner-content,
+section,
+footer .footer-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-default);
+}
+
+/* 3. Estilo do Cabeçalho e Navegação - ATUALIZADO */
+header {
+  border-bottom: 2px solid var(--primary-color); /* Borda grossa preta (Street) */
+  background-color: var(--secondary-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem var(--spacing-default);
+}
+
+/* Logo Agressiva (Sublinhado Vermelho) */
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 4px solid var(--accent-color); /* Linha grossa e vermelha */
+  line-height: 1;
+}
+
+.logo:hover {
+  color: var(--accent-color);
+}
+
+/* NOVO: Menu Hamburguer (Ícone) - Escondido por padrão */
+.menu-check {
+  display: none; /* Esconde o checkbox real */
+}
+
+.menu-toggle {
+  display: none; /* Inicia oculto em desktop */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 200; 
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease-in-out;
+}
+/* FIM - Menu Hamburguer (Ícone) */
+
+
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* Efeito de Linha Deslizante (Street) */
+  position: relative;
+  padding-bottom: 3px;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease-out;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+
+/* CTA Drops - ATUALIZADO */
+.nav-cta {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0; /* Quadrado */
+  font-weight: 700;
+  border: 2px solid var(--primary-color);
+}
+
+.nav-cta:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* 4. Estilo do Banner - ATUALIZADO (Manter imagem do HTML) */
+.banner {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  color: white; /* Texto Preto (Alto Contraste) */
+  background: rgba(255, 255, 255, 0); /* Overlay muito leve */
+  padding: 0 var(--spacing-default);
+}
+
+.banner-content h1 {
+  font-size: 4rem; /* Maior */
+  margin-bottom: 0.5rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 4px black;
+}
+
+.banner-content p {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: white
+}
+
+.banner-content a {
+  padding: 0.75rem 2rem;
+  background-color: var(--accent-color); /* CTA Vermelho */
+  color: var(--secondary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+.banner-content a:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 70vh; /* Mesma altura do seu banner anterior */
+  overflow: hidden; /* CRUCIAL: Esconde os slides que não estão ativos */
+}
+
+.carousel-slide {
+  display: flex; /* Faz com que os itens fiquem lado a lado */
+  width: 100%; /* O JS ajustará a largura total dos slides */
+  height: 100%;
+  transition: transform 0.5s ease-in-out; /* Transição suave entre slides */
+}
+
+.carousel-item {
+  flex: 0 0 100%; /* Cada item ocupa 100% da largura do contêiner */
+  width: 100%;
+  height: 100%;
+  position: relative; /* Para posicionar o banner-content */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mantém o estilo do seu banner-content */
+.carousel-item .banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  color: var(--primary-color); 
+  background: rgba(255, 255, 255, 0); 
+  padding: 0 var(--spacing-default);
+}
+
+.carousel-item .banner-content h1 {
+  font-size: 4rem; 
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+}
+
+.carousel-item .banner-content p {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: white;
+
+}
+
+.carousel-item .banner-content a {
+  padding: 0.75rem 2rem;
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0;
+ 
+}
+
+.carousel-item .banner-content a:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+
+/* Controles de Navegação (Botões) */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--primary-color); /* Fundo preto */
+  color: var(--secondary-color); /* Setas brancas */
+  border: none;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 10;
+  opacity: 0.1;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  border-radius: 0; /* Estilo Street */
+}
+
+.carousel-btn:hover {
+  opacity: 0.2;
+  background-color: var(--accent-color); /* Vermelho no hover */
+  color: var(--primary-color);
+  
+}
+
+.carousel-btn.prev {
+  left: var(--spacing-default);
+}
+
+.carousel-btn.next {
+  right: var(--spacing-default);
+}
+
+/* Indicadores de Slide (Dots) */
+.carousel-dots-container {
+  position: absolute;
+  bottom: var(--spacing-default);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5); /* Cinza claro transparente */
+  border: 2px solid var(--primary-color); /* Borda preta */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: var(--accent-color); /* Vermelho quando ativo */
+  border-color: var(--accent-color);
+}
+
+/* 7. Media Query para Responsividade - Ajustes para o Carousel */
+@media (max-width: 768px) {
+  .carousel-item .banner-content h1 {
+      font-size: 2.5rem; /* Ajusta o tamanho da fonte para mobile */
+  }
+
+  .carousel-item .banner-content p {
+      font-size: 1rem;
+  }
+
+  .carousel-btn {
+      padding: 0.7rem 1rem; /* Botões menores em mobile */
+      font-size: 1.2rem;
+  }
+  .carousel-btn.prev { left: 1rem; }
+  .carousel-btn.next { right: 1rem; }
+
+  .carousel-dots-container {
+      bottom: 1rem; /* Dots mais próximos da borda em mobile */
+  }
+  .carousel-dot {
+      width: 10px;
+      height: 10px;
+  }
+}
+
+/* 5. Estilo da Seção de Produtos (Drops Recentes) - ATUALIZADO (Street) */
+section {
+  padding: var(--spacing-default) 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-default);
+  padding: 0 var(--spacing-default);
+}
+
+.section-header h2 {
+  font-size: 2rem;
+}
+
+.grid {
+    display: grid;
+    /* Isso garante que os cards tenham entre 220px e 280px, nunca ficando gigantes */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
+    gap: 25px;
+    padding: 20px;
+    
+    
+}
+
+.card {
+    border: 2px solid var(--primary-color);
+    background-color: #fff;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+   
+}
+/* Isso afeta todas as imagens dentro dos cards da grid */
+.grid .card img {
+    width: 100%;           /* OBRIGATÓRIO: A imagem nunca passará da largura do card */
+    height: auto;          /* Mantém a proporção original da altura... */
+    aspect-ratio: 3 / 4;   /* ...OU force um formato padrão (ex: retrato para roupas) */
+    object-fit: cover;     /* A MÁGICA: Preenche o espaço sem esticar/deformar a foto */
+    display: block;        /* Remove espaços brancos extras abaixo da imagem */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0 var(--primary-color); /* Sombra 3D Sólida (Street) */
+}
+
+/* Isso garante que a imagem ocupe a largura do card mas tenha altura fixa */
+/* Ajuste Definitivo da Imagem */
+.card img {
+    width: 100%;
+    height: 380px;       /* Altura fixa para todos os cards ficarem iguais */
+    object-fit: cover;   /* Não deixa a imagem esticar */
+    display: block;
+    border-bottom: 2px solid var(--primary-color); /* Linha separadora street */
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.oldprice {
+  color: var(--light-text-color);
+  text-decoration: line-through;
+  margin-right: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--accent-color); /* Preço Vermelho VIVO */
+  font-size: 1.2rem;
+}
+
+/* 6. Estilo do Rodapé - ATUALIZADO (Bloco Preto) */
+footer {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  padding: var(--spacing-default) 0;
+  margin-top: var(--spacing-default);
+}
+
+footer a {
+  color: var(--light-text-color);
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-default);
+}
+
+.foot-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color); /* Branco */
+}
+
+footer h4 {
+  color: var(--secondary-color); /* Branco */
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+footer p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.socials a {
+  margin-right: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.newsletter input[type="email"] {
+  padding: 0.75rem 1rem;
+  width: 100%;
+  border: 1px solid var(--accent-color); /* Borda vermelha */
+  border-radius: 0;
+  margin-top: 0.5rem;
+  font-family: var(--font-body);
+}
+
+/* 3. Estilo do Menu Dropdown - EXISTENTE */
+.dropdown-trigger {
+  position: relative; 
+}
+
+.dropdown-menu {
+  display: none; 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 150px;
+  background-color: var(--secondary-color); 
+  border: 2px solid var(--primary-color); 
+  padding: 0;
+  z-index: 10;
+  box-shadow: 4px 4px 0 var(--primary-color);
+}
+
+/* Regras do Dropdown... (mantidas) */
+.dropdown-menu li { padding: 0; white-space: nowrap; }
+.dropdown-menu a { display: block; padding: 0.5rem 1rem; font-weight: 400; letter-spacing: normal; text-transform: none; }
+.dropdown-menu a:hover { background-color: var(--primary-color); color: var(--secondary-color); }
+.dropdown-trigger:hover .dropdown-menu { display: block; }
+.dropdown-trigger > a::after { display: none; }
+
+
+/* 7. Media Query para Responsividade - ATUALIZADO (Menu Hamburguer Puro CSS) */
+@media (max-width: 768px) {
+  /* 7.1 Exibir e Posicionar o Hamburguer */
+  .menu-toggle {
+      display: flex; /* Exibe o ícone em mobile */
+      /* Garante que o ícone fique na direita do logo */
+      margin-left: auto;
+  }
+  
+  /* 7.2 Ocultar o Menu Horizontal em Mobile */
+  #nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Oculto à direita */
+      width: 70%; 
+      height: 100vh;
+      background-color: var(--primary-color); /* Fundo preto do menu */
+      transition: right 0.3s ease-in-out;
+      padding-top: 5rem;
+      z-index: 150;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  /* Regra MÁGICA: Abre o menu quando o checkbox está marcado */
+  /* ATENÇÃO: É ESSENCIAL que o checkbox esteja *antes* do label e do nav no HTML */
+  .menu-check:checked + .menu-toggle + #nav-menu {
+      right: 0; /* Desliza o menu para dentro da tela */
+  }
+
+  /* 7.3 Estilização e Animação no Mobile */
+  
+  /* Animação do "X" */
+  .menu-check:checked + .menu-toggle .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .menu-check:checked + .menu-toggle .bar:nth-child(2) {
+      opacity: 0; 
+  }
+  .menu-check:checked + .menu-toggle .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  /* Layout dos itens no menu off-canvas */
+  #nav-menu ul {
+      flex-direction: column;
+      width: 100%;
+      padding: 0 1.5rem;
+  }
+  
+  #nav-menu ul li {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+  }
+  
+  #nav-menu a {
+      color: var(--secondary-color); /* Links brancos no fundo preto */
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: block;
+      padding: 0.5rem 0;
+  }
+  
+  /* Inverte o CTA no menu off-canvas */
+  #nav-menu .nav-cta {
+      background-color: var(--accent-color);
+      color: var(--primary-color); 
+      border-color: var(--accent-color);
+  }
+  
+  /* Garante que o dropdown também seja vertical no menu off-canvas */
+  .dropdown-trigger .dropdown-menu {
+      position: static; 
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      width: 100%;
+      padding-left: 1rem;
+  }
+  
+  .dropdown-trigger .dropdown-menu a {
+      color: var(--light-text-color);
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+  }
+  
+  /* Oculta o dropdown no estado fechado (para uma navegação mais limpa) */
+  .dropdown-menu {
+      display: none;
+  }
+  /* Para o puro CSS, vamos reabilitar o hover no mobile (funciona em alguns tablets) */
+  .dropdown-trigger:hover .dropdown-menu {
+      display: block; 
+  }
+
+
+  /* Outros ajustes de responsividade (Mantidos) */
+  .navbar {
+      flex-direction: row; /* Volta a ser horizontal no mobile para logo e hamburguer */
+      align-items: center;
+      gap: 0;
+  }
+
+  .banner-content h1 {
+      font-size: 2.5rem;
+  }
+
+  .banner-content p {
+      font-size: 1rem;
+  }
+
+  .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+  }
+}
+
+.cart-container {
+  display: flex;
+  gap: var(--spacing-default);
+  align-items: flex-start;
+}
+
+/* Estilo da Tabela (mantendo a estética Street) */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart-table th, .cart-table td {
+  text-align: left;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+.cart-table th {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: var(--light-text-color);
+  border-bottom: 2px solid var(--primary-color); /* Linha grossa */
+}
+
+/* Linha do Produto */
+.product-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.product-line img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+.product-info a {
+  font-weight: 600;
+}
+.product-info small {
+  display: block;
+  color: var(--light-text-color);
+  font-size: 0.85rem;
+}
+
+/* Controles de Quantidade */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--light-text-color);
+  border-radius: 0;
+}
+.quantity-control button, .quantity-control input {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.quantity-control input {
+  width: 30px;
+  text-align: center;
+  -moz-appearance: textfield; /* Remove flechas do Firefox */
+  appearance: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+/* Coluna de Preço */
+.price-col {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* Coluna de Remoção */
+.remove-btn {
+  color: var(--accent-color); /* Vermelho */
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.remove-btn:hover {
+  opacity: 1;
+}
+
+
+/* Sidebar/Resumo do Pedido */
+.cart-summary {
+  width: 350px;
+  padding: var(--spacing-default);
+  border: 2px solid var(--primary-color);
+  background-color: #f9f9f9;
+  position: sticky; /* Fica fixo ao rolar */
+  top: 100px; /* Abaixo do header */
+}
+.cart-summary h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 5px;
+}
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.total-line {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+/* Botão Finalizar */
+.btn-checkout {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 0;
+  transition: background-color 0.2s;
+}
+.btn-checkout:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border-color: var(--primary-color);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .cart-container {
+      flex-direction: column;
+  }
+  .cart-summary {
+      width: 100%;
+      position: static;
+  }
+}
+
+/* ========================================= */
+/* --- CSS PARA O MODAL DE VISUALIZAÇÃO RÁPIDA (QUICK VIEW) --- */
+/* ========================================= */
+
+/* 1. Base do Modal (Fundo Escuro) */
+#quick-view-modal {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 2000; /* Acima de tudo (header sticky, etc.) */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+  background-color: rgba(0, 0, 0, 0.9); /* Fundo preto semi-transparente */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* 2. Container do Conteúdo */
+.modal-content {
+  background-color: var(--secondary-color); /* Branco */
+  padding: 0;
+  border: 4px solid var(--primary-color); /* Borda grossa Streetwear */
+  box-shadow: 10px 10px 0 var(--accent-color); /* Sombra 3D Sólida Vermelha */
+  max-width: 1000px; /* Largura ideal em desktop */
+  width: 95%;
+  position: relative;
+  animation: fadeIn 0.3s;
+}
+
+/* 3. Layout de 2 Colunas (Imagem e Detalhes) */
+.quick-view-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50/50 em desktop */
+}
+
+.qv-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.qv-details-area {
+  padding: 2.5rem;
+}
+
+/* 4. Títulos e Texto */
+.qv-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.qv-description {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+.qv-price-text {
+  margin-bottom: 1.5rem;
+}
+
+/* 5. Opções (Tamanho/Cor) */
+.qv-options {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+.qv-option-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.qv-buttons-group button {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color); /* Borda Preta */
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-bottom: 8px; /* Para melhor visualização em mobile */
+  border-radius: 0; /* Quadrado */
+  transition: all 0.2s ease;
+}
+
+.qv-buttons-group button.selected {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-color: var(--accent-color); /* Borda Vermelha no Selecionado */
+  box-shadow: 2px 2px 0 var(--accent-color); /* Sombra leve no selecionado */
+}
+.qv-buttons-group button:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+
+/* 6. Ações (Quantidade e Botão CTA) */
+.qv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.qv-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.qv-quantity label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+.qv-quantity input {
+  border: 2px solid var(--primary-color);
+  padding: 0.5rem;
+  font-family: var(--font-body);
+  text-align: center;
+  width: 60px;
+}
+
+.qv-add-to-cart {
+  /* Reutiliza nav-cta, mas com estilo CTA de destaque */
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--secondary-color);
+  flex-grow: 1; /* Permite que ele se expanda um pouco */
+}
+
+.qv-add-to-cart:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border-color: var(--primary-color);
+}
+
+.qv-full-details-link {
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+
+/* 7. Botão de Fechar */
+#close-modal {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 2001;
+  transition: color 0.2s;
+}
+
+#close-modal:hover {
+  color: var(--accent-color);
+}
+
+/* 8. Responsividade (Empilha colunas em telas menores) */
+@media (max-width: 800px) {
+  #quick-view-modal {
+      padding: 0;
+      align-items: flex-start; /* Alinha o modal ao topo em mobile */
+  }
+  .modal-content {
+      max-width: 100%;
+      width: 100%;
+      min-height: 100vh; /* Ocupa a tela toda em mobile */
+      box-shadow: none; /* Remove a sombra 3D em mobile */
+      border-width: 0;
+  }
+  .quick-view-layout {
+      grid-template-columns: 1fr; /* Empilha as colunas */
+  }
+  .qv-image-area {
+      height: 400px;
+  }
+  .qv-details-area {
+      padding: 1.5rem;
+  }
+  .qv-actions {
+      flex-direction: column;
+      align-items: stretch; /* Estica o botão CTA */
+      gap: 1rem;
+  }
+  .qv-add-to-cart {
+      width: 100%;
+  }
+  .qv-full-details-link {
+      text-align: center;
+      width: 100%;
+  }
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.product-img-wrapper {
+    width: 100%;
+    height: 320px; /* Altura fixa para o card não crescer infinito */
+    overflow: hidden;
+    border-bottom: 2px solid var(--primary-color);
+    
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem preencher o espaço sem esticar */
+    transition: transform 0.5s ease;
+    
+}
+
+.card:hover img {
+    transform: scale(1.05); /* Efeito de zoom no hover */
+}
+/* Container para alinhar o carrinho à direita ou ao lado do menu */
+.header-actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Empurra o carrinho para a direita se usar flexbox na navbar */
+    margin-right: 15px; /* Espaço entre carrinho e o menu hambúrguer */
+}
+
+/* O botão do carrinho */
+.cart-btn {
+    position: relative; /* Essencial para o badge se posicionar em relação a ele */
+    color: #000; /* Cor do ícone */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* O Ícone SVG */
+.cart-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* A bolinha vermelha (Badge) */
+.cart-badge {
+    position: absolute;
+    top: -5px;    /* Sobe um pouco */
+    right: -8px;  /* Vai para a direita */
+    background-color: #e74c3c; /* Vermelho alerta */
+    color: white;
+    font-size: 0.75rem; /* Fonte pequena */
+    font-weight: bold;
+    min-width: 18px; /* Tamanho mínimo da bolinha */
+    height: 18px;
+    border-radius: 50%; /* Faz ficar redondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff; /* Borda branca para separar do ícone */
+}
+
+/* AJUSTE PARA NAVBAR (Se sua navbar ainda não for Flexbox) */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espalha Logo - Carrinho - Menu */
+    padding: 0 20px;
+    position: relative;
+}
+
+/* MOBILE: Ajustes para garantir que não quebre */
+@media (max-width: 768px) {
+    .header-actions {
+        margin-right: 10px; /* Menos espaço no celular */
+    }
+    
+    /* Garante que o menu toggle fique na ponta direita */
+    .menu-toggle {
+        order: 3; 
+    }
+    .header-actions {
+        order: 2; /* Carrinho fica no meio ou antes do menu */
+    }
+}
+

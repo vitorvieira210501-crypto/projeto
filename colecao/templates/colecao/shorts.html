@@ -1,0 +1,44 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block texto %}
+<main>
+    <section class="collection-page" style="padding-top: 5rem; padding-bottom: 3rem;">
+
+        <div class="section-header" style="max-width: var(--max-width); margin: 0 auto 2rem auto; padding: 0 var(--spacing-default); text-align: center;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">TODOS OS SHORTS</h1>
+            <p style="font-size: 1.1rem; color: var(--light-text-color); max-width: 600px; margin: 0 auto;">
+                Liberdade de movimento com a estética VTRSTORE. Modelagem urbana perfeita para o dia a dia.
+            </p>
+        </div>
+        
+        <div class="grid" style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default);">
+            {% for product in products %}
+                <div class="card quick-view-trigger" 
+                     data-product-id="{{ product.id }}"
+                     data-name="{{ product.name }}"
+                     data-price="{{ product.price }}"
+                     data-description="{{ product.description }}"
+                     data-image="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x800{% endif %}"
+                     data-sizes="38,40,42,44,46" 
+                     data-colors="Preto,Beige,Cinza"> 
+                     <div class="product-img-wrapper">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="https://placehold.co/600x800" alt="Sem Imagem">
+                        {% endif %}
+                    </div>
+
+                    <div class="card-body">
+                        <h4>{{ product.name }}</h4>
+                        <span class="price">R$ {{ product.price }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Nenhum short encontrado no momento.</p>
+            {% endfor %}
+        </div>
+    </section>
+ {% include 'global/partials/_quick_view_modal.html' %}
+{% endblock texto %}

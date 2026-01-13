@@ -1,0 +1,47 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block texto %}
+<main>
+    <section class="collection-page" style="padding-top: 5rem; padding-bottom: 3rem;">
+
+        <div class="section-header" style="max-width: var(--max-width); margin: 0 auto 2rem auto; padding: 0 var(--spacing-default); text-align: center;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">TODAS AS JAQUETAS</h1>
+            <p style="font-size: 1.1rem; color: var(--light-text-color); max-width: 600px; margin: 0 auto;">
+                A terceira peça que define o visual. Proteção contra o frio sem perder a identidade e o corte VTRSTORE.
+            </p>
+        </div>
+        
+        <div class="grid" style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default);">
+            {% for product in products %}
+                <div class="card quick-view-trigger" 
+                     data-product-id="{{ product.id }}"
+                     data-name="{{ product.name }}"
+                     data-price="{{ product.price }}"
+                     data-description="{{ product.description }}"
+                     data-image="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x800{% endif %}"
+                     /* AJUSTE: Tamanhos padrão de jaquetas */
+                     data-sizes="P,M,G,GG,XG" 
+                     data-colors="Preto,Corta-Vento,Jeans,Camuflado">
+                    
+                    <div class="product-img-wrapper">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="https://placehold.co/600x800" alt="Sem Imagem">
+                        {% endif %}
+                    </div>
+
+                    <div class="card-body">
+                        <h4>{{ product.name }}</h4>
+                        <span class="price">R$ {{ product.price }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Nenhuma jaqueta encontrada no momento.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% include 'global/partials/_quick_view_modal.html' %}
+ 
+{% endblock texto %}

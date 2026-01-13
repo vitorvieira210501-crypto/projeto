@@ -1,0 +1,47 @@
+{% extends 'global/base.html' %}
+
+{% block texto %}
+<section class="secao-dados">
+    <div class="container-form">
+        <h2 class="titulo-dados">Meus Dados Pessoais</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="grupo-input">
+                <label>Nome Completo</label>
+                <input type="text" name="nome" value="{{ user.get_full_name|default:user.username }}" required>
+            </div>
+
+            <div class="grupo-input">
+                <label>E-mail de Cadastro</label>
+                <input type="email" name="email" value="{{ user.email }}" required>
+            </div>
+
+            <div class="acoes-form">
+                <button type="submit" class="btn-salvar">SALVAR ALTERAÇÕES</button>
+                <a href="{% url 'dashboard' %}" class="btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<style>
+    .secao-dados { padding: 80px 20px; min-height: 70vh; display: flex; justify-content: center; background-color: #f9f9f9; }
+    .container-form { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); width: 100%; max-width: 500px; height: fit-content; }
+    
+    .titulo-dados { margin-bottom: 30px; font-size: 1.5rem; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+
+    .grupo-input { margin-bottom: 20px; }
+    .grupo-input label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9rem; }
+    .grupo-input input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; }
+    
+    .acoes-form { margin-top: 30px; display: flex; gap: 15px; align-items: center; }
+    
+    .btn-salvar { background: black; color: white; border: none; padding: 12px 25px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+    .btn-salvar:hover { background: #333; }
+
+    .btn-cancelar { color: #666; text-decoration: none; font-size: 0.9rem; }
+    .btn-cancelar:hover { text-decoration: underline; color: black; }
+</style>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "global/base.html" %}
+
+{% block texto %}
+
+<main>
+    <section class="contact-section" style="padding-top: 4rem; padding-bottom: 4rem;">
+
+        <div class="section-header"
+            style="max-width: var(--max-width); margin: 0 auto 3rem auto; padding: 0 var(--spacing-default); text-align: center;">
+            <h1 style="font-size: 3.5rem;">FALE CONOSCO</h1>
+            <p style="font-size: 1.1rem; color: var(--light-text-color); max-width: 600px; margin: 1rem auto 0 auto;">
+                Tem alguma dúvida, sugestão ou proposta? Envie sua mensagem.
+                Estamos na linha.
+            </p>
+        </div>
+
+        <div class="grid"
+            style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default); align-items: flex-start; margin-bottom: 4rem;">
+
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    {% csrf_token %} <div style="margin-bottom: 1.5rem;">
+                        <label for="name"
+                            style="display: block; font-family: var(--font-heading); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;">
+                            Nome
+                        </label>
+                        <input type="text" id="name" name="name" required
+                            style="width: 100%; padding: 0.75rem 1rem; font-family: var(--font-body); font-size: 1rem; border: 2px solid var(--primary-color); border-radius: 0; background-color: var(--secondary-color);">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="email"
+                            style="display: block; font-family: var(--font-heading); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;">
+                            E-mail
+                        </label>
+                        <input type="email" id="email" name="email" required
+                            style="width: 100%; padding: 0.75rem 1rem; font-family: var(--font-body); font-size: 1rem; border: 2px solid var(--primary-color); border-radius: 0; background-color: var(--secondary-color);">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="message"
+                            style="display: block; font-family: var(--font-heading); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;">
+                            Mensagem
+                        </label>
+                        <textarea id="message" name="message" rows="6" required
+                            style="width: 100%; padding: 0.75rem 1rem; font-family: var(--font-body); font-size: 1rem; border: 2px solid var(--primary-color); border-radius: 0; background-color: var(--secondary-color); line-height: 1.6;"></textarea>
+                    </div>
+
+                    <button type="submit" class="nav-cta"
+                        style="padding: 0.75rem 2rem; border-color: var(--accent-color); background-color: var(--accent-color); color: var(--secondary-color); cursor: pointer; font-size: 1rem; width: 100%;">
+                        ENVIAR MENSAGEM
+                    </button>
+                </form>
+            </div>
+
+            <div class="contact-info" style="margin-top: 2rem;">
+
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">CANAIS DIRETOS</h3>
+                <p style="color: var(--light-text-color); margin-bottom: 1.5rem;">
+                    Prefere não usar o formulário? Sem problemas. Use nossos canais diretos para uma resposta rápida.
+                </p>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h4
+                        style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">
+                        E-MAIL DE SUPORTE
+                    </h4>
+                    <p><a href="mailto:contato@vtrstore.com"
+                            style="color: var(--primary-color); text-decoration: underline;">contato@vtrstore.com</a>
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h4
+                        style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">
+                        REDES SOCIAIS
+                    </h4>
+                    <p style="color: var(--light-text-color);">Envie uma DM. Estamos sempre online.</p>
+                    <div class="socials" style="margin-top: 0.5rem; display: flex; gap: 1rem;">
+                        <a href="#"
+                            style="font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">INSTAGRAM</a>
+                        <a href="#" style="font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">TIKTOK</a>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h4
+                        style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">
+                        FAQ
+                    </h4>
+                    <p style="color: var(--light-text-color);">Sua dúvida pode já estar respondida.</p>
+                    <p><a href="faq.html"
+                            style="color: var(--primary-color); text-decoration: underline; font-weight: 600;">Acesse
+                            nosso FAQ</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container"
+            style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; text-align: left;">NOSSA LOCALIZAÇÃO</h3>
+            
+            <div style="width: 100%; height: 450px; background-color: #eee;">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.109388307406!2d-43.22415668441753!3d-22.98305558497334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bd44577876a45%3A0x633842146864197c!2sAv.%20Ataulfo%20de%20Paiva%20-%20Leblon%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2022430-070!5e0!3m2!1spt-BR!2sbr!4v1704908000000!5m2!1spt-BR!2sbr" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; filter: grayscale(100%) invert(0%);" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--light-text-color);">
+                Av. Ataulfo de Paiva - Leblon, Rio de Janeiro - RJ, 22430-070
+            </p>
+        </div>
+
+    </section>
+</main>
+
+{% endblock texto %}

@@ -1,0 +1,96 @@
+ {% extends 'global/base.html' %}
+ {% block texto %}
+    <main>
+
+        <section class="drops-header" style="padding: 4rem var(--spacing-default) 2rem; text-align: center;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">CALENDÁRIO DE DROPS</h1>
+            <p style="font-size: 1.1rem; color: var(--light-text-color); max-width: 600px; margin: 0 auto;">
+                O futuro da VTRSTORE. O que está no cofre.
+            </p>
+        </section>
+    
+        <section class="next-drop" style="padding: 2rem var(--spacing-default) 4rem;">
+            <div class="grid" style="max-width: var(--max-width); margin: 0 auto; align-items: center; gap: 3rem;">
+                
+                <div class="next-drop-image">
+                    <img src="/static/global/image/newdrop.jpg" 
+                         alt="Teaser do próximo drop"
+                         style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--primary-color);">
+                </div>
+                
+                <div class="next-drop-info" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); margin-bottom: 0.5rem;">
+                        PRÓXIMO LANÇAMENTO: 15 DE DEZEMBRO
+                    </h3>
+                    
+                    <h2 style="font-size: 3rem; margin-bottom: 1rem; line-height: 1.1;">
+                        COLEÇÃO 'CONTRASTE'
+                    </h2>
+                    
+                    <p style="font-size: 1.1rem; color: var(--light-text-color); margin-bottom: 2rem;">
+                        Uma exploração do preto e branco com cortes assimétricos e o impacto do nosso vermelho. Peças limitadas. Sem re-estoque.
+                    </p>
+                    
+                    <a href="#" class="nav-cta" style="padding: 0.75rem 2rem; text-align: center; max-width: 300px; background-color: var(--primary-color); border-color: var(--primary-color);">
+                        NOTIFIQUE-ME
+                    </a>
+                </div>
+            </div>
+        </section>
+    
+        <section class="future-drops" style="padding: 4rem var(--spacing-default); background-color: #f9f9f9;">
+            
+            <div class="section-header" style="max-width: var(--max-width); margin: 0 auto 2rem auto;">
+                <h2>FUTUROS ARQUIVADOS</h2>
+            </div>
+            
+            <div class="grid" style="max-width: var(--max-width); margin: 0 auto;">
+    
+                <div class="card" style="box-shadow: none;"> <img src="/static/global/image/dropprojeto.jpg" 
+                         alt="Drop futuro classificado"
+                         style="width: 100%; height: 300px; object-fit: cover; background-color: var(--primary-color); filter: grayscale(100%);">
+                    
+                    <div classbody" style="padding: 1rem;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">PROJETO: [REDACTED]</h4>
+                        <p style="font-family: var(--font-heading); font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem;">
+                            DATA: JANEIRO 2026
+                        </p>
+                        <p style="color: var(--light-text-color);">Status: Em desenvolvimento. Arquivos bloqueados."</p>
+                    </div>
+                </div>
+    
+                <div class="card" style="box-shadow: none;">
+                    <img src="/static/global/image/imagenewdrop.jpg" 
+                         alt="Drop futuro com desfoque"
+                         style="width: 100%; height: 300px; object-fit: cover; filter: blur(8px); transition: filter 0.3s ease;">
+                    
+                    <div class="card-body" style="padding: 1rem;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">DROP 'ESSENTIALS V2'</h4>
+                        <p style="font-family: var(--font-heading); font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem;">
+                            DATA: FEVEREIRO 2026
+                        </p>
+                        <p style="color: var(--light-text-color);">Status: Confirmado. Revelação em breve.</p>
+                    </div>
+                </div>
+    
+                <div class="card" style="box-shadow: none;">
+                    <div style="width: 100%; height: 300px; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center;">
+                        <h2 style="color: var(--secondary-color); font-size: 3rem;">?</h2>
+                    </div>
+                    
+                    <div class="card-body" style="padding: 1rem;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">COLABORAÇÃO SURPRESA</h4>
+                        <p style="font-family: var(--font-heading); font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem;">
+                            DATA: [TBA]
+                        </p>
+                        <p style="color: var(--light-text-color);">Status: Em negociação.</p>
+                    </div>
+                </div>
+    
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
+{%endblock texto%}

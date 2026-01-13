@@ -1,0 +1,71 @@
+{% extends 'global/base.html' %}
+
+{% block texto %}
+<section class="secao-pedidos">
+    <div class="container-pedidos">
+        <h1 class="titulo-pagina">Meus Pedidos</h1>
+
+        {% if pedidos %}
+            <div class="tabela-responsiva">
+                <table class="tabela-pedidos">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in pedidos %}
+                        <tr>
+                            <td>#{{ pedido.id }}</td>
+                            <td>{{ pedido.data_criacao|date:"d/m/Y" }}</td>
+                            <td>
+                                <span class="status-badge status-{{ pedido.status }}">
+                                    {{ pedido.get_status_display }}
+                                </span>
+                            </td>
+                            <td>R$ {{ pedido.valor_total }}</td>
+                            <td>
+                                <a href="{% url 'detalhes_pedido' pedido.id %}" class="btn-ver">Ver Detalhes</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="sem-pedidos">
+                <p>Você ainda não fez nenhum pedido.</p>
+                <a href="{% url 'colecao' %}" class="btn-comprar">Ir as compras</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .secao-pedidos { padding: 60px 20px; min-height: 70vh; }
+    .container-pedidos { max-width: 900px; margin: 0 auto; }
+    .titulo-pagina { font-size: 2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Tabela */
+    .tabela-pedidos { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .tabela-pedidos th, .tabela-pedidos td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+    .tabela-pedidos th { background-color: #f8f8f8; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
+    
+    /* Badges de Status */
+    .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+    .status-P { background: #ffeaa7; color: #d35400; } /* Pendente - Amarelo */
+    .status-A { background: #55efc4; color: #00b894; } /* Aprovado - Verde */
+    .status-C { background: #ff7675; color: #d63031; } /* Cancelado - Vermelho */
+
+    /* Botões */
+    .btn-ver { text-decoration: none; color: black; font-weight: bold; border: 1px solid black; padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; transition: 0.3s; }
+    .btn-ver:hover { background: black; color: white; }
+    
+    .sem-pedidos { text-align: center; padding: 40px; background: #f9f9f9; border-radius: 8px; }
+    .btn-comprar { display: inline-block; margin-top: 15px; background: black; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; }
+</style>
+{% endblock %}

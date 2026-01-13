@@ -1,0 +1,65 @@
+{% extends 'global/base.html' %} 
+
+{% block texto %}
+<main>
+<section class="secao-auth">
+    <div class="container-auth">
+        <h2>Acesse sua conta</h2>
+        
+        <form method="POST" class="form-auth">
+            {% csrf_token %}
+            
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+
+            {% for campo in formulario %}
+                <div class="grupo-form">
+                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                    {{ campo }}
+                    
+                    {% if campo.errors %}
+                        <div class="msg-erro">
+                            {% for erro in campo.errors %}
+                                <p>{{ erro }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-preto">ENTRAR</button>
+        </form>
+
+        <p class="rodape-auth">
+            Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
+        </p>
+    </div>
+</section>
+</main>
+
+<style>
+    /* Atualizei as classes CSS para português também */
+    .secao-auth { padding: 50px 20px; display: flex; justify-content: center; }
+    .container-auth { width: 100%; max-width: 400px; background: #fff; padding: 30px; border: 1px solid #eee; }
+    .grupo-form { margin-bottom: 15px; }
+    .grupo-form label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .grupo-form input { width: 100%; padding: 10px; border: 1px solid #ccc; }
+    .msg-erro { color: red; font-size: 0.8rem; margin-top: 5px; }
+    .btn-preto { width: 100%; padding: 15px; background: black; color: white; border: none; cursor: pointer; font-weight: bold; }
+    .btn-preto:hover { background: #333; }
+    /* 1. Define que o corpo do site deve ocupar NO MÍNIMO 100% da altura da tela */
+   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100vh = 100% da altura da janela do navegador */
+    margin: 0; /* Garante que não tenha margens brancas padrão */
+}
+
+/* 2. O elemento <main> vai crescer para ocupar todo o espaço vazio */
+main {
+    flex: 1; 
+    /* Isso empurra o footer lá para baixo se sobrar espaço */
+}
+</style>
+{% endblock %}

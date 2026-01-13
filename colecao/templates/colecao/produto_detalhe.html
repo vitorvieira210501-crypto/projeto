@@ -1,0 +1,88 @@
+{% extends 'global/base.html' %} 
+{% block texto %}
+<main class="product-detail-container">
+    <div class="product-grid-detail">
+        
+        <div class="product-image-large">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="https://placehold.co/600x800" alt="Sem imagem">
+            {% endif %}
+        </div>
+
+        <div class="product-info-area">
+            <span class="category-tag">VTRSTORE | NOVO DROP</span>
+            <h1>{{ product.name }}</h1>
+            <p class="product-price">R$ {{ product.price }}</p>
+            
+            <div class="product-description">
+                <h3>Descrição</h3>
+                <p>{{ product.description }}</p>
+            </div>
+
+            <div class="size-selection">
+                <h3>Tamanho</h3>
+                <div class="size-options">
+                    <button>P</button>
+                    <button>M</button>
+                    <button>G</button>
+                    <button>GG</button>
+                </div>
+            </div>
+
+            <button class="btn-add-cart">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</main>
+
+<style>
+    .product-detail-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    .product-grid-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+    .product-image-large img {
+        width: 100%;
+        border: 2px solid #000;
+        box-shadow: 10px 10px 0 #ff0000; /* Sombra Streetwear */
+    }
+    .category-tag { color: #777; font-size: 0.8rem; letter-spacing: 2px; }
+    h1 { font-size: 3rem; margin: 10px 0; text-transform: uppercase; }
+    .product-price { font-size: 2rem; font-weight: bold; color: #ff0000; margin-bottom: 20px; }
+    
+    .size-options button {
+        padding: 10px 20px;
+        border: 2px solid #000;
+        background: none;
+        cursor: pointer;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+    .size-options button:hover { background: #000; color: #fff; }
+
+    .btn-add-cart {
+        width: 100%;
+        padding: 20px;
+        background: #000;
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn-add-cart:hover { background: #ff0000; }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .product-grid-detail { grid-template-columns: 1fr; }
+    }
+</style>
+{% endblock texto %}

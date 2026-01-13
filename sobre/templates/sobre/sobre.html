@@ -1,0 +1,74 @@
+{% extends 'global/base.html' %}
+{% block texto %}
+<body>
+ <main>
+
+    <section class="about-hero" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="grid">
+            
+            <div class="hero-text" style="display: flex; flex-direction: column; justify-content: center;">
+                <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem;">
+                    MAIS QUE UMA MARCA.
+                    <span style="color: var(--accent-color);">UM MANIFESTO.</span>
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--light-text-color);">
+                    A VTRSTORE nasceu do asfalto, para redefinir o básico. Cansados do óbvio, criamos o "Streetwear Clean": design minimalista com uma atitude agressiva. 
+                </p>
+                <p style="font-size: 1.1rem; margin-top: 1rem;">
+                    Não seguimos tendências. Nós ditamos o contraste.
+                </p>
+            </div>
+            
+            <div class="hero-image">
+                <img src="/static/global/image/fotosobre.jpg" 
+                     alt="Lookbook da VTRSTORE"
+                     style="width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--primary-color);">
+            </div>
+        </div>
+    </section>
+
+    <section class="our-pillars" style="background-color: #f9f9f9; padding-top: 4rem; padding-bottom: 4rem;">
+        
+        <div class="section-header" style="max-width: var(--max-width); margin: 0 auto 2rem auto; padding: 0 var(--spacing-default);">
+            <h2>NOSSOS PILARES</h2>
+        </div>
+
+        <div class="grid" style="max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-default);">
+            
+            <div class="pillar-item">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">DESIGN LIMPO</h3>
+                <p>Estética minimalista que fala alto. Focamos no essencial, no corte, e no impacto visual. Menos é mais, mas mais é chato.</p>
+            </div>
+            
+            <div class="pillar-item">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">AUTENTICIDADE</h3>
+                <p>Criamos o que queremos usar. Cada peça é uma extensão da nossa identidade. Sem cópias, sem atalhos. Apenas cultura de rua autêntica.</p>
+            </div>
+            
+            <div class="pillar-item">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">QUALIDADE BRUTAL</h3>
+                <p>Usamos os melhores materiais porque nossas peças são feitas para durar mais que uma temporada. Do tecido à costura, a qualidade não é negociável.</p>
+            </div>
+
+        </div>
+    </section>
+    
+    <section class="cta-section" style="text-align: center; padding: 5rem var(--spacing-default); background-color: var(--primary-color);">
+        <h2 style="color: var(--secondary-color); font-size: 2.5rem; margin-bottom: 1.5rem;">
+            DESIGN LIMPO. ATITUDE MÁXIMA.
+        </h2>
+        <p style="color: var(--light-text-color); margin-bottom: 2rem;">
+            Veja como nossa estética se traduz em peças únicas.
+        </p>
+        
+        <a href="colecao.html" style="padding: 0.75rem 2rem; background-color: var(--accent-color); color: var(--secondary-color); font-weight: 700; text-transform: uppercase;">
+            VER COLEÇÃO
+        </a>
+    </section>
+
+</main>
+  
+
+</body>
+</html>
+{% endblock texto %}
